@@ -128,7 +128,7 @@ export const resetPassword = async (req, res) => {
         const isOtpValid = await bcrypt.compare(otp.toString(), otpRecord.otp);
         if(isOtpValid)
         {
-            user.password = await bcrypt.hash(password, 10)
+            user.password = password;
             await user.save();
             await otpRecord.deleteOne();
             return res.status(200).json({message: 'password reset successfully'});

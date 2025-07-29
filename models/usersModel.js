@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
+import req from "express/lib/request.js";
 
 const userSchema = new Schema({
     email:{type:String , required:true , unique:true},
@@ -10,7 +11,7 @@ const userSchema = new Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 export const User = mongoose.model('User', userSchema);
