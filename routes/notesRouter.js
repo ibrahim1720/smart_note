@@ -4,6 +4,8 @@ import {extractFromToken} from "../middleware/auth.js";
 import {validationMiddleware} from "../middleware/validationMiddleware.js";
 import {addNoteSchema} from "../validators/notes.js";
 import {errorHandler} from "../middleware/errorhandlerMiddleware.js";
+import {createHandler} from "graphql-http";
+import {mainSchema} from "../GraphQl/Schema/index.js";
 
 const router = Router();
 

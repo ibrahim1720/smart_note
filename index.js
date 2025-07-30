@@ -6,7 +6,8 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import userRouter from "./routes/userRouter.js";
 import {globalResponse} from "./middleware/errorhandlerMiddleware.js";
-
+import { createHandler } from "graphql-http/lib/use/express";
+import { mainSchema } from "./GraphQl/Schema/index.js";
 
 const port = 3000;
 
@@ -31,7 +32,7 @@ app.use(json());
 app.use('/api', authRouter);
 app.use('/api', notesRouter);
 app.use('/api', userRouter);
-
+app.use("/api/graphql", createHandler({ schema: mainSchema }));
 
 app.use((req, res) => {
     res.status(404).json({ message: 'This router is not exist' });
